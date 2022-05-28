@@ -20,6 +20,15 @@ ShaderProgram::ShaderProgram(const std::string& vertexShaderName, const std::str
     glAttachShader(m_program, fragment);
     glLinkProgram(m_program);
 
+    int success;
+    glGetProgramiv(m_program, GL_LINK_STATUS, &success);
+    if (!success) {
+        char infoLog[512];
+        glGetShaderInfoLog(m_program, 512, NULL, infoLog);
+        std::cerr << "Shader linker error : " << infoLog << '\n';
+        exit(-1);
+    }
+
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 }

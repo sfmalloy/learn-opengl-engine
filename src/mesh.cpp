@@ -17,8 +17,11 @@ Mesh::Mesh(const std::vector<f32>& data, const std::vector<u32>& indices, Shader
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(f32), reinterpret_cast<void*>(0));
-    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(POSITION_ATTRIB_INDEX, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(f32), reinterpret_cast<void*>(0));
+    glEnableVertexAttribArray(POSITION_ATTRIB_INDEX);
+
+    glVertexAttribPointer(COLOR_ATTRIB_INDEX, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(f32), reinterpret_cast<void*>(3 * sizeof(f32)));
+    glEnableVertexAttribArray(COLOR_ATTRIB_INDEX);
 }
 
 Mesh::~Mesh() {

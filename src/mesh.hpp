@@ -17,4 +17,7 @@ private:
 
     size_t m_size;
     ShaderProgram* m_shaderProgram;
+
+    const u32 POSITION_ATTRIB_INDEX = 0;
+    const u32 COLOR_ATTRIB_INDEX = 1;
 };

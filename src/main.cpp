@@ -30,6 +30,10 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
 
     GLFWwindow* window = glfwCreateWindow(640, 480, "Lab 1", NULL, NULL);
     if (window == NULL) {
@@ -53,7 +57,7 @@ int main() {
         // process input
 
         // fun rendering things
-        glClearColor(0.0f, 1.0f, 0.3f, 1.0f);
+        glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         for (Mesh& mesh : scene) {
             mesh.draw();
@@ -79,21 +83,23 @@ std::vector<Mesh> initScene(ShaderProgram* shaderProgram) {
     std::vector<Mesh> scene;
 
     std::vector<f32> aVerts{
-       -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f,
-        0.5, 0.0, 0.0
+        -0.5f, -0.5f, 0.0f,    1.0f, 0.0f, 0.0f,
+         0.5f, -0.5f, 0.0f,    1.0f, 0.0f, 0.0f,
+         0.5f, 0.25f, 0.0f,    0.5f, 0.0f, 0.5f,
+         0.0f, 0.75f, 0.0f,    0.0f, 0.0f, 1.0f,
+        -0.5f, 0.25f, 0.0f,    0.0f, 0.0f, 1.0f
     };
     std::vector<u32> aIndices{
         0, 1, 2,
-        3, 1, 2
+        0, 4, 2,
+        2, 3, 4
     };
     scene.push_back(Mesh(aVerts, aIndices, shaderProgram));
 
     std::vector<f32> bVerts{
-        0.6f, 0.6f, 0.0f,
-        0.7f, 0.7f, 0.0f,
-        0.8f, 0.6f, 0.0f
+        0.5f, 0.5f, 0.0f,   1.0, 0.0, 0.0,
+        0.7f, 0.7f, 0.0f,   0.0, 1.0, 0.0,
+        0.9f, 0.5f, 0.0f,   0.0, 0.0, 1.0
     };
     std::vector<u32> bIndices{
         0, 1, 2
