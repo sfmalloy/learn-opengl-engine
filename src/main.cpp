@@ -22,6 +22,8 @@ void setViewportSizeCallback(GLFWwindow* window, int width, int height);
 
 std::vector<Mesh> initScene(ShaderProgram* shaderProgram);
 
+void processInput(GLFWwindow* window);
+
 int main() {
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW.\n";
@@ -55,6 +57,7 @@ int main() {
 
     while (!glfwWindowShouldClose(window)) {
         // process input
+        processInput(window);
 
         // fun rendering things
         glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -107,4 +110,10 @@ std::vector<Mesh> initScene(ShaderProgram* shaderProgram) {
     scene.push_back(Mesh(bVerts, bIndices, shaderProgram));
 
     return scene;
+}
+
+void processInput(GLFWwindow* window) {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, GL_TRUE);
+    }
 }
