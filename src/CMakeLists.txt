@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
-include_directories("include/")
 include_directories("/include")
-add_executable(LearnOpenGL "main.cpp" "glad.c"  "mesh.cpp" "shader.cpp" "include/glad/glad.h")
+include_directories("glad/")
+add_executable(LearnOpenGL "main.cpp" "mesh.cpp" "shader.cpp" "glad/glad.c")
 
 find_package(glfw3 REQUIRED HINTS $ENV{GLFW_DIR})
 
